@@ -1,9 +1,9 @@
-# The manifest for the "demo" service.
+# The manifest for the "demo-dev" service.
 # Read the full specification for the "Load Balanced Web Service" type at:
 #  https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/
 
 # Your service name will be used in naming your resources like log groups, ECS services, etc.
-name: demo
+name: demo-dev
 type: Load Balanced Web Service
 
 # Distribute traffic to your service.
@@ -12,7 +12,7 @@ http:
   # To match all requests you can use the "/" path.
   path: '/'
   # You can specify a custom health check path. The default is "/".
-  # healthcheck: '/healtcheck'
+  # healthcheck: '/'
 
 # Configuration for your containers and service.
 image:
@@ -23,16 +23,13 @@ image:
 
 cpu: 256       # Number of CPU units for the task.
 memory: 512    # Amount of memory in MiB used by the task.
-
-# Enabling autoscaling
-count: # Number of tasks that should be running in your service.
-  range: 
-    min: 1  # Minimum number of tasks
-    max: 4  # Maximum number of tasks
-  
-  cpu_percentage: 50  # Target CPU utilization to trigger scaling
-
+count: 1       # Number of tasks that should be running in your service.
 exec: true     # Enable running commands in your container.
+#network:
+#  connect: true # Enable Service Connect for intra-environment traffic between services.
+
+# storage:
+  # readonly_fs: true       # Limit to read-only access to mounted root filesystems.
 
 # Optional fields for more advanced use-cases.
 #
@@ -45,9 +42,9 @@ exec: true     # Enable running commands in your container.
 # You can override any of the values defined above by environment.
 #environments:
 #  test:
-#    count: 2               # Number of tasks to run for the "test" environme
-
+#    count: 2               # Number of tasks to run for the "test" environment.
+#    deployment:            # The deployment strategy for the "test" environment.
+#       rolling: 'recreate' # Stops existing tasks before new ones are started for faster deployments.
 logging:
   retention: 30       # Number of days to retain logs (optional)
   destination:        # Optional: specify a custom CloudWatch Log Group
-

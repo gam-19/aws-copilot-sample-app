@@ -23,14 +23,15 @@ image:
 
 cpu: 256       # Number of CPU units for the task.
 memory: 512    # Amount of memory in MiB used by the task.
+count: 1
 
 # Enabling autoscaling
-count: # Number of tasks that should be running in your service.
-  range: 
-    min: 1  # Minimum number of tasks
-    max: 4  # Maximum number of tasks
+#count: # Number of tasks that should be running in your service.
+#  range: 
+#    min: 1  # Minimum number of tasks
+#    max: 1  # Maximum number of tasks
   
-  cpu_percentage: 50  # Target CPU utilization to trigger scaling
+#  cpu_percentage: 99  # Target CPU utilization to trigger scaling
 
 exec: true     # Enable running commands in your container.
 
